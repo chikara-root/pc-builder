@@ -1,0 +1,128 @@
+/**
+ * PC Builder - Hardware Dataset
+ * Stage 2 & 3 Integrated Dataset (with filters and multi-selection support)
+ */
+
+var CATEGORY_META = {
+    cpu: { label: "CPU", icon: "bi-cpu", short: "CPU", filterable: true },
+    gpu: { label: "GPU", icon: "bi-gpu-card", short: "GPU", filterable: true },
+    ram: { label: "RAM", icon: "bi-memory", short: "RAM", filterable: true, multiSelect: true },
+    motherboard: { label: "Motherboard", icon: "bi-layers", short: "MBO", filterable: true },
+    storage: { label: "SSD / Storage", icon: "bi-hard-drive", short: "SSD", filterable: true, multiSelect: true },
+    psu: { label: "Power Supply (PSU)", icon: "bi-power", short: "PSU" },
+    case: { label: "PC Case", icon: "bi-box-seam", short: "CASE" },
+    cooler: { label: "CPU Cooler", icon: "bi-fan", short: "COOL" }
+};
+
+var CATEGORIES = ["cpu", "gpu", "ram", "motherboard", "storage", "psu", "case", "cooler"];
+
+var MOCK_DATABASE = {
+    cpu: [
+        { id: "cpu_i9_14900k", name: "Intel Core i9-14900K", socket: "LGA 1700", cores: 24, threads: 32, tdp: "125W", boostClock: "6.0 GHz", ramType: "DDR5/DDR4", igpu: true, gen: "14th Gen", family: "Core i9", manufacturer: "Intel" },
+        { id: "cpu_i7_14700k", name: "Intel Core i7-14700K", socket: "LGA 1700", cores: 20, threads: 28, tdp: "125W", boostClock: "5.6 GHz", ramType: "DDR5/DDR4", igpu: true, gen: "14th Gen", family: "Core i7", manufacturer: "Intel" },
+        { id: "cpu_i5_13600k", name: "Intel Core i5-13600K", socket: "LGA 1700", cores: 14, threads: 20, tdp: "125W", boostClock: "5.1 GHz", ramType: "DDR5/DDR4", igpu: true, gen: "13th Gen", family: "Core i5", manufacturer: "Intel" },
+        { id: "cpu_i5_12400f", name: "Intel Core i5-12400F", socket: "LGA 1700", cores: 6, threads: 12, tdp: "65W", boostClock: "4.4 GHz", ramType: "DDR5/DDR4", igpu: false, gen: "12th Gen", family: "Core i5", manufacturer: "Intel" },
+        { id: "cpu_r9_7950x3d", name: "AMD Ryzen 9 7950X3D", socket: "AM5", cores: 16, threads: 32, tdp: "120W", boostClock: "5.7 GHz", ramType: "DDR5", igpu: true, gen: "Ryzen 7000", family: "Ryzen 9", manufacturer: "AMD" },
+        { id: "cpu_r7_7800x3d", name: "AMD Ryzen 7 7800X3D", socket: "AM5", cores: 8, threads: 16, tdp: "120W", boostClock: "5.0 GHz", ramType: "DDR5", igpu: true, gen: "Ryzen 7000", family: "Ryzen 7", manufacturer: "AMD" },
+        { id: "cpu_r5_7600x", name: "AMD Ryzen 5 7600X", socket: "AM5", cores: 6, threads: 12, tdp: "105W", boostClock: "5.3 GHz", ramType: "DDR5", igpu: true, gen: "Ryzen 7000", family: "Ryzen 5", manufacturer: "AMD" },
+        { id: "cpu_r9_5900x", name: "AMD Ryzen 9 5900X", socket: "AM4", cores: 12, threads: 24, tdp: "105W", boostClock: "4.8 GHz", ramType: "DDR4", igpu: false, gen: "Ryzen 5000", family: "Ryzen 9", manufacturer: "AMD" },
+        { id: "cpu_r7_5800x", name: "AMD Ryzen 7 5800X", socket: "AM4", cores: 8, threads: 16, tdp: "105W", boostClock: "4.7 GHz", ramType: "DDR4", igpu: false, gen: "Ryzen 5000", family: "Ryzen 7", manufacturer: "AMD" },
+        { id: "cpu_r5_5600", name: "AMD Ryzen 5 5600", socket: "AM4", cores: 6, threads: 12, tdp: "65W", boostClock: "4.4 GHz", ramType: "DDR4", igpu: false, gen: "Ryzen 5000", family: "Ryzen 5", manufacturer: "AMD" }
+    ],
+    gpu: [
+        { id: "gpu_rtx_4090", name: "NVIDIA GeForce RTX 4090", vram: "24GB", vramType: "GDDR6X", tdp: "450W", recommendedPSU: "850W", length: "304mm", perfTier: 10, manufacturer: "NVIDIA", generation: "40 Series" },
+        { id: "gpu_rtx_4080", name: "NVIDIA GeForce RTX 4080 Super", vram: "16GB", vramType: "GDDR6X", tdp: "320W", recommendedPSU: "750W", length: "310mm", perfTier: 9, manufacturer: "NVIDIA", generation: "40 Series" },
+        { id: "gpu_rtx_4070_ti", name: "NVIDIA GeForce RTX 4070 Ti Super", vram: "16GB", vramType: "GDDR6X", tdp: "285W", recommendedPSU: "700W", length: "285mm", perfTier: 8, manufacturer: "NVIDIA", generation: "40 Series" },
+        { id: "gpu_rt_4070", name: "NVIDIA GeForce RTX 4070 Super", vram: "12GB", vramType: "GDDR6X", tdp: "220W", recommendedPSU: "650W", length: "244mm", perfTier: 7, manufacturer: "NVIDIA", generation: "40 Series" },
+        { id: "gpu_rt_4060_ti", name: "NVIDIA GeForce RTX 4060 Ti", vram: "8GB", vramType: "GDDR6", tdp: "160W", recommendedPSU: "550W", length: "240mm", perfTier: 6, manufacturer: "NVIDIA", generation: "40 Series" },
+        { id: "gpu_rtx_3060", name: "NVIDIA GeForce RTX 3060", vram: "12GB", vramType: "GDDR6", tdp: "170W", recommendedPSU: "550W", length: "242mm", perfTier: 5, manufacturer: "NVIDIA", generation: "30 Series" },
+        { id: "gpu_rtx_3070", name: "NVIDIA GeForce RTX 3070", vram: "8GB", vramType: "GDDR6", tdp: "220W", recommendedPSU: "650W", length: "280mm", perfTier: 6, manufacturer: "NVIDIA", generation: "30 Series" },
+        { id: "gpu_rx_7900_xtx", name: "AMD Radeon RX 7900 XTX", vram: "24GB", vramType: "GDDR6", tdp: "355W", recommendedPSU: "800W", length: "287mm", perfTier: 9, manufacturer: "AMD", generation: "7000 Series" },
+        { id: "gpu_rx_7800_xt", name: "AMD Radeon RX 7800 XT", vram: "16GB", vramType: "GDDR6", tdp: "263W", recommendedPSU: "700W", length: "267mm", perfTier: 7, manufacturer: "AMD", generation: "7000 Series" },
+        { id: "gpu_rx_7700_xt", name: "AMD Radeon RX 7700 XT", vram: "12GB", vramType: "GDDR6", tdp: "245W", recommendedPSU: "650W", length: "267mm", perfTier: 6, manufacturer: "AMD", generation: "7000 Series" },
+        { id: "gpu_rx_6700_xt", name: "AMD Radeon RX 6700 XT", vram: "12GB", vramType: "GDDR6", tdp: "230W", recommendedPSU: "650W", length: "267mm", perfTier: 5, manufacturer: "AMD", generation: "6000 Series" },
+        { id: "gpu_rx_5700_xt", name: "AMD Radeon RX 5700 XT", vram: "8GB", vramType: "GDDR6", tdp: "225W", recommendedPSU: "600W", length: "270mm", perfTier: 4, manufacturer: "AMD", generation: "5000 Series" },
+        { id: "gpu_arc_a770", name: "Intel Arc A770", vram: "16GB", vramType: "GDDR6", tdp: "225W", recommendedPSU: "650W", length: "245mm", perfTier: 5, manufacturer: "Intel", generation: "Alchemist" }
+    ],
+    ram: [
+        { id: "ram_ddr5_6400_32", name: "G.Skill Trident Z5 32GB DDR5-6400", type: "DDR5", speed: "6400 MHz", capacity_GB: 32, modules: "2x16GB" },
+        { id: "ram_ddr5_6000_32", name: "Corsair Vengeance 32GB DDR5-6000", type: "DDR5", speed: "6000 MHz", capacity_GB: 32, modules: "2x16GB" },
+        { id: "ram_ddr5_5600_16", name: "Kingston FURY Beast 16GB DDR5-5600", type: "DDR5", speed: "5600 MHz", capacity_GB: 16, modules: "2x8GB" },
+        { id: "ram_ddr4_3600_32", name: "Corsair Vengeance LPX 32GB DDR4-3600", type: "DDR4", speed: "3600 MHz", capacity_GB: 32, modules: "2x16GB" },
+        { id: "ram_ddr4_3200_16", name: "G.Skill Ripjaws V 16GB DDR4-3200", type: "DDR4", speed: "3200 MHz", capacity_GB: 16, modules: "2x8GB" },
+        { id: "ram_ddr4_3200_8", name: "Crucial Basics 8GB DDR4-3200", type: "DDR4", speed: "3200 MHz", capacity_GB: 8, modules: "1x8GB" }
+    ],
+    motherboard: [
+        { id: "mobo_z790_atx", name: "ASUS ROG Strix Z790-E Gaming", socket: "LGA 1700", chipset: "Z790", formFactor: "ATX", ramType: "DDR5", ramSlots: 4, sataPorts: 4, m2Slots: 2 },
+        { id: "mobo_b760_matx", name: "MSI MAG B760M Mortar", socket: "LGA 1700", chipset: "B760", formFactor: "mATX", ramType: "DDR5", ramSlots: 4, sataPorts: 4, m2Slots: 2 },
+        { id: "mobo_z690_atx", name: "Gigabyte Z690 AORUS ELITE", socket: "LGA 1700", chipset: "Z690", formFactor: "ATX", ramType: "DDR4", ramSlots: 4, sataPorts: 4, m2Slots: 3 },
+        { id: "mobo_x670e_atx", name: "ASUS ROG Crosshair X670E Hero", socket: "AM5", chipset: "X670E", formFactor: "ATX", ramType: "DDR5", ramSlots: 4, sataPorts: 4, m2Slots: 3 },
+        { id: "mobo_b650_matx", name: "Gigabyte B650M DS3H", socket: "AM5", chipset: "B650", formFactor: "mATX", ramType: "DDR5", ramSlots: 2, sataPorts: 4, m2Slots: 1 },
+        { id: "mobo_x570_atx", name: "MSI MPG X570S Edge Max", socket: "AM4", chipset: "X570", formFactor: "ATX", ramType: "DDR4", ramSlots: 4, sataPorts: 4, m2Slots: 2 },
+        { id: "mobo_b550_atx", name: "ASUS TUF Gaming B550-Plus", socket: "AM4", chipset: "B550", formFactor: "ATX", ramType: "DDR4", ramSlots: 4, sataPorts: 4, m2Slots: 2 },
+        { id: "mobo_a520_itx", name: "ASRock A520M-ITX/ac", socket: "AM4", chipset: "A520", formFactor: "ITX", ramType: "DDR4", ramSlots: 2, sataPorts: 2, m2Slots: 1 }
+    ],
+    storage: [
+        { id: "ssd_990_pro_2", name: "Samsung 990 PRO 2TB", type: "SSD", interface: "NVMe PCIe 4.0", capacity_GB: 2000, readSpeed: "7450 MB/s" },
+        { id: "ssd_980_pro_1", name: "Samsung 980 PRO 1TB", type: "SSD", interface: "NVMe PCIe 4.0", capacity_GB: 1000, readSpeed: "7000 MB/s" },
+        { id: "ssd_sn850x_1", name: "WD_BLACK SN850X 1TB", type: "SSD", interface: "NVMe PCIe 4.0", capacity_GB: 1000, readSpeed: "7300 MB/s" },
+        { id: "ssd_p5_plus_1", name: "Crucial P5 Plus 1TB", type: "SSD", interface: "NVMe PCIe 4.0", capacity_GB: 1000, readSpeed: "6600 MB/s" },
+        { id: "ssd_mx500_1", name: "Crucial MX500 1TB", type: "SSD", interface: "SATA III", capacity_GB: 1000, readSpeed: "560 MB/s" },
+        { id: "hdd_barracuda_2", name: "Seagate Barracuda 2TB", type: "HDD", interface: "SATA III", capacity_GB: 2000, readSpeed: "190 MB/s" }
+    ],
+    psu: [
+        { id: "psu_rm1000x", name: "Corsair RM1000x", wattage: "1000W", efficiency: "80+ Gold", formFactor: "ATX", modular: "Fully" },
+        { id: "psu_rm850x", name: "Corsair RM850x", wattage: "850W", efficiency: "80+ Gold", formFactor: "ATX", modular: "Fully" },
+        { id: "psu_rm750x", name: "Corsair RM750x", wattage: "750W", efficiency: "80+ Gold", formFactor: "ATX", modular: "Fully" },
+        { id: "psu_tx650m", name: "Corsair TX650M", wattage: "650W", efficiency: "80+ Gold", formFactor: "ATX", modular: "Semi" },
+        { id: "psu_evga_600", name: "EVGA 600 W1", wattage: "600W", efficiency: "80+ White", formFactor: "ATX", modular: "No" },
+        { id: "psu_sf750", name: "Corsair SF750", wattage: "750W", efficiency: "80+ Platinum", formFactor: "SFX", modular: "Fully" }
+    ],
+    case: [
+        { id: "case_4000d", name: "Corsair 4000D Airflow", formFactor: "ATX", gpuMaxLen: "360mm", coolerMaxHeight: "170mm", dimensions: "453x230x466mm" },
+        { id: "case_meshify_2", name: "Fractal Design Meshify 2", formFactor: "ATX", gpuMaxLen: "450mm", coolerMaxHeight: "185mm", dimensions: "542x240x474mm" },
+        { id: "case_pop_mini", name: "Fractal Design Pop Mini Air", formFactor: "mATX", gpuMaxLen: "365mm", coolerMaxHeight: "170mm", dimensions: "432x215x393mm" },
+        { id: "case_nr200", name: "Cooler Master MasterBox NR200", formFactor: "ITX", gpuMaxLen: "330mm", coolerMaxHeight: "155mm", dimensions: "376x185x292mm" },
+        { id: "case_h5_flow", name: "NZXT H5 Flow", formFactor: "ATX", gpuMaxLen: "365mm", coolerMaxHeight: "165mm", dimensions: "446x227x464mm" }
+    ],
+    cooler: [
+        { id: "cooler_nh_d15", name: "Noctua NH-D15", type: "Air", height: "165mm", socketSupport: ["LGA 1700", "AM5", "AM4"], tdpRating: "250W" },
+        { id: "cooler_ak620", name: "DeepCool AK620", type: "Air", height: "160mm", socketSupport: ["LGA 1700", "AM5", "AM4"], tdpRating: "260W" },
+        { id: "cooler_hyper_212", name: "Cooler Master Hyper 212 Black", type: "Air", height: "159mm", socketSupport: ["LGA 1700", "AM5", "AM4"], tdpRating: "150W" },
+        { id: "cooler_kraken_360", name: "NZXT Kraken 360", type: "AIO", height: "30mm (Rad)", socketSupport: ["LGA 1700", "AM5", "AM4"], tdpRating: "300W+" },
+        { id: "cooler_h150i", name: "Corsair iCUE H150i Elite", type: "AIO", height: "27mm (Rad)", socketSupport: ["LGA 1700", "AM5", "AM4"], tdpRating: "300W+" },
+        { id: "cooler_pure_rock", name: "be quiet! Pure Rock 2", type: "Air", height: "155mm", socketSupport: ["LGA 1700", "AM5", "AM4"], tdpRating: "150W" }
+    ]
+};
+
+// Filter configurations for UI generation
+var FILTER_CONFIG = {
+    cpu: [
+        { key: 'manufacturer', label: 'Manufacturer' },
+        { key: 'family', label: 'Family (Intel)' },
+        { key: 'gen', label: 'Generation' }
+    ],
+    gpu: [
+        { key: 'manufacturer', label: 'Manufacturer' },
+        { key: 'generation', label: 'Generation/Family' }
+    ],
+    ram: [
+        { key: 'type', label: 'Type (DDR4/DDR5)' },
+        { key: 'capacity_GB', label: 'Capacity (GB)' }
+    ],
+    motherboard: [
+        { key: 'ramType', label: 'RAM Type' }
+    ],
+    storage: [
+        { key: 'interface', label: 'Interface' },
+        { key: 'type', label: 'Type' }
+    ]
+};
+
+// Helper to parse total capacity
+var parseTotalCapacityGB = function(items) {
+    if (!Array.isArray(items)) return 0;
+    return items.reduce((sum, r) => sum + (r.capacity_GB || 0), 0);
+}
+
+console.info('[PC BUILDER] Hardware dataset loaded.');

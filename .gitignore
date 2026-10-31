@@ -1,0 +1,66 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+*.whl
+
+# Django
+*.log
+local_settings.py
+# db.sqlite3 is tracked in version control to preserve seeded hardware data
+# For production, use a managed database backup/restore procedure
+media/
+
+# Production static files (collected by `python manage.py collectstatic`)
+staticfiles/
+
+# Virtual environments
+venv/
+backend/venv/
+.venv/
+env/
+ENV/
+
+# Environment variables
+# .env is git-ignored for security (contains secrets in production)
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Node
+node_modules/
+npm-debug.log*
+npm-shrinkwrap.json
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Coverage
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+cache/
+nosetests.xml
+coverage.xml
+*.cover
+.pytest_cache/
+.mypy_cache/
+
+# Frontend build artifacts (if any)
+*.min.js
+*.min.css

@@ -1,0 +1,418 @@
+/* PC Builder Stage 1 - Premium Aesthetic Styles */
+
+:root {
+    --bg-main: #f8fafc;
+    --surface: #ffffff;
+    --surface-muted: #f1f5f9;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --accent: #2563eb;
+    --accent-hover: #1d4ed8;
+    --border-color: #e2e8f0;
+    --shadow-soft: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-premium: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --radius: 16px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.5;
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.05) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.05) 0px, transparent 50%);
+    background-attachment: fixed;
+}
+
+/* Typography & Layout */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.container-fluid {
+    max-width: 1600px;
+}
+
+/* Header */
+header.sticky-top {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 1020;
+}
+
+/* Premium Cards */
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    transition: var(--transition);
+    overflow: hidden;
+}
+
+.card.shadow-sm {
+    box-shadow: var(--shadow-soft) !important;
+}
+
+.card:hover {
+    box-shadow: var(--shadow-premium) !important;
+}
+
+.card-header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 1.25rem;
+    font-weight: 600;
+}
+
+/* Hardware Selection Cards */
+.hardware-card {
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1rem;
+    height: 100%;
+    transition: var(--transition);
+    cursor: pointer;
+    position: relative;
+    background: var(--surface);
+}
+
+.hardware-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: 0 12px 20px -10px rgba(37, 99, 235, 0.15);
+}
+
+.hardware-card.border-primary {
+    border-width: 2px;
+}
+
+.hardware-card .card-title {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.hardware-card .spec-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+}
+
+.hardware-card .spec-value {
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Spec inline display */
+.hardware-card .spec-inline {
+    display: inline-block;
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    margin-right: 0.4rem;
+    margin-bottom: 0.25rem;
+}
+
+/* Fixed spec-inline with wrapping */
+.hardware-card .specs-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin-top: 0.5rem;
+}
+
+/* Centered icon in hardware cards */
+.hardware-card .cat-icon {
+    margin: 0 auto 0.75rem;
+}
+
+/* Category Icons */
+.cat-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--surface-muted);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 0.75rem;
+    color: var(--accent);
+    transition: var(--transition);
+}
+
+.hardware-card:hover .cat-icon {
+    background: var(--accent);
+    color: white;
+}
+
+/* Score Cards */
+.score-card {
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.score-card:hover {
+    border-color: var(--accent);
+}
+
+.score-value {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--accent);
+    margin-bottom: 0.25rem;
+}
+
+.score-label {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+/* Badges */
+.badge {
+    padding: 0.4em 0.8em;
+    font-weight: 600;
+    border-radius: 6px;
+}
+
+.badge-demo {
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--accent);
+    font-size: 0.65rem;
+}
+
+/* Selected Components Redesign */
+#build-summary {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+#build-summary .list-group-item {
+    border: none;
+    padding: 0.65rem 1.25rem;
+    font-size: 0.82rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    border-bottom: 1px solid var(--surface-muted);
+    transition: background-color 0.2s ease;
+}
+
+#build-summary .list-group-item:last-child {
+    border-bottom: none;
+}
+
+#build-summary .list-group-item:hover {
+    background-color: rgba(37, 99, 235, 0.03);
+}
+
+#build-summary .item-label {
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.15rem;
+}
+
+#build-summary .item-value {
+    font-weight: 600;
+    color: var(--text-primary);
+    word-break: break-word;
+    font-size: 0.8rem;
+}
+
+/* Multi-select badge in summary */
+#build-summary .badge {
+    font-size: 0.62rem;
+    white-space: nowrap;
+    margin-left: auto;
+}
+
+/* Small rounded remove button for multi-select items */
+#build-summary .btn-remove-small {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    font-size: 0.55rem;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    background: transparent;
+    cursor: pointer;
+}
+
+#build-summary .btn-remove-small:hover {
+    background: rgba(220, 38, 38, 0.08);
+    color: var(--accent-hover);
+    border-color: var(--accent-hover);
+}
+
+/* Compatibility warning in hardware cards */
+.hardware-card .text-warning {
+    border-top: 1px solid var(--border-color);
+    padding-top: 0.4rem;
+    margin-top: 0.4rem;
+}
+
+/* Filter header styling */
+.card-header.bg-light {
+    background-color: var(--surface-muted) !important;
+}
+
+/* Badge adjustments for selected count */
+.badge.bg-primary {
+    font-size: 0.62rem;
+}
+
+/* Empty state */
+#summary-empty {
+    padding: 2rem 1rem;
+}
+
+/* Custom scrollbar for long lists */
+#build-summary .card-body {
+    max-height: none;
+    overflow-y: visible;
+}
+
+/* Warning badge in compatibility section */
+#compat-status .text-danger,
+#compat-status .text-warning {
+    font-size: 0.78rem;
+    margin-bottom: 0.2rem;
+}
+
+/* Calculate section styling */
+#calculate-section .btn-primary {
+    min-width: 280px;
+}
+
+#calculate-section p.text-muted {
+    transition: opacity 0.2s ease;
+}
+
+/* Analysis page summary box */
+#selection-summary-box {
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+#selection-summary-box .list-group-item {
+    border: none;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid var(--surface-muted);
+}
+
+#selection-summary-box .list-group-item:last-child {
+    border-bottom: none;
+}
+
+/* Responsive adjustments for build summary */
+@media (max-width: 768px) {
+    #build-summary {
+        max-height: 60vh;
+    }
+    
+    #build-summary .list-group-item {
+        padding: 0.5rem 0.75rem;
+    }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-reveal {
+    animation: fadeInUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    opacity: 0;
+}
+
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+
+/* Progress Bars */
+.progress {
+    height: 8px;
+    border-radius: 4px;
+    background-color: var(--surface-muted);
+}
+
+.progress-bar {
+    transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* Custom Tooltips */
+[data-tooltip] {
+    position: relative;
+    cursor: help;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Highlight missing category */
+.card-header.highlight-missing {
+    background-color: rgba(220, 38, 38, 0.1) !important;
+    border-left: 4px solid #dc2626;
+    transition: all 0.3s ease;
+    animation: highlightPulse 1.5s ease-out;
+}
+
+@keyframes highlightPulse {
+    0% { background-color: rgba(220, 38, 38, 0.2); }
+    50% { background-color: rgba(220, 38, 38, 0.05); }
+    100% { background-color: rgba(220, 38, 38, 0.1); }
+}
+
+/* Validation error box */
+#validation-error-box {
+    border-radius: 8px;
+    border: none;
+}
+
+/* Responsive Grid Adjustments */
+@media (max-width: 991.98px) {
+    .position-sticky {
+        position: static !important;
+    }
+}
+
+.section-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+    display: block;
+}
